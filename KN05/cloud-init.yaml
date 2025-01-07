@@ -1,15 +1,32 @@
+# Indicates this is a cloud-init configuration file
 #cloud-config
+
+# User account configuration section
 users:
+  # Create a new user named ubuntu
   - name: ubuntu
+    # Give user full sudo privileges without password
     sudo: ALL=(ALL) NOPASSWD:ALL
+    # Add user to these system groups
     groups: users, admin
+    # Set the user's home directory
     home: /home/ubuntu
+    # Set the default shell for the user
     shell: /bin/bash
+    # SSH key configuration for secure access
     ssh_authorized_keys:
+      # Add public SSH key for AWS authentication
       - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDPFdpAR3M9psfrZgTVEdlbMfZTX8O/uZdWOqM1zu7HaWtwWoymzjuub4P0UVaqWvq/dbZivt8lZ7A5pdCWnGAfTMnnc51VZ0/oHcTZa9XWse63mzD7HjMRijIR0/rk3AT6k9oY95YQG0z2pvlHfx2tFl7YgX/FmwHloduEboZntj7JM/nR3Ql7JB2EZXY76fksxYAh5md7yW7ZaXtq58+NFkpqVW0Jp1J5BFOIomQJoKlun6asF0/yIENvMPRyuTh/1OKYF7EbtHgsLXdIiVrTTgzBL2mYmh2Y2cxlxvgY8iBhGFFa6gIDnfwMU92uyGKBpk7Lfmn1a+tVm3/ntkmz aws-key       
+
+# Disable SSH password authentication for security
 ssh_pwauth: false
+# Allow root account access
 disable_root: false 
+# Update package list on first boot
 package_update: true
+# Install these packages during initialization
 packages:
+  # Install curl for making HTTP requests
   - curl 
+  # Install wget for downloading files
   - wget 
